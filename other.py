@@ -37,11 +37,10 @@ url = 'http://httpbin.org/cookies'
 cookies = {'cookies_are' : 'working'}
 r = requests.get(url, cookies=cookies)
 print(r.text)
-
 print(r.cookies['example_cookie_name'])  # использование cookies полученных от сервера
 
 
-"""Пример"""
+"""Пример POST"""
 
 params = {"q": "Нижний Новгород", "appid": API_TOKEN, "units": "metric"}
 headers = {
