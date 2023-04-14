@@ -4,7 +4,7 @@ import json
 
 
 class TestGoogleMaps():
-    data = {
+    data = json.dumps({
       "location": {
         "lat": -40.383494,
         "lng": 30.427362
@@ -19,7 +19,7 @@ class TestGoogleMaps():
       ],
       "website": "http://google.com",
       "language": "French-IN"
-    }
+    })
 
     params = {
         "key": "qaclick123"
@@ -33,14 +33,8 @@ class TestGoogleMaps():
     def test_create_place(self):
         """Проверка статус кода"""
         response = requests.post("https://rahulshettyacademy.com/maps/api/place/add/json", data=self.data, params=self.params, headers=self.headers)
-        # response.encoding = 'utf-8-sig'
-        # print(response.json())
-        print(response.text)
-
-
+        print(response.json())
         assert response.status_code == 200
-
-
 
 
 
