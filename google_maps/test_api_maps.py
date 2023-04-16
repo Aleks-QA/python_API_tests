@@ -2,7 +2,6 @@ import requests
 import json
 
 
-
 class TestGoogleMaps():
     data = json.dumps({
       "location": {
@@ -30,11 +29,17 @@ class TestGoogleMaps():
         "Content-Type": "application/json"
     }
 
+
+    # @classmethod
     def test_create_place(self):
         """Проверка статус кода"""
         response = requests.post("https://rahulshettyacademy.com/maps/api/place/add/json", data=self.data, params=self.params, headers=self.headers)
         print(response.json())
+        place_id = response.json()['place_id']
         assert response.status_code == 200
+        return place_id
+
+
 
 
 
