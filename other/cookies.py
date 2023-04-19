@@ -13,9 +13,6 @@ if cookie_value is not None: # если куки пришли, использу�
 
 response2 = requests.post('https://playground.learnqa.ru/api/check_auth_cookie', cookies=cookies)
 print(response2.text)
-# print(response2.status_code)
-# print(dict(response1.cookies)) # получить cookies
-
 
 
 """Отправка cookies на сервер"""

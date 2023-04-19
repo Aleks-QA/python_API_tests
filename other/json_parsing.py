@@ -1,5 +1,18 @@
+import json
 import requests
 from json.decoder import JSONDecodeError
+
+
+string_as_json_format = '{"answer": "Hello, User"}'  # входная строка, ключ-значение должны быть в двойных кавычках!
+obj = json.loads(string_as_json_format)  # превращаем строку в объект JSON
+key = "answer"
+
+
+"""Поиск значения по ключу"""
+if key in obj:
+    print(obj[key])
+else:
+    print(f'Ключа {key} в JSON нет')
 
 
 """Поиск значения по ключу в входных данных в формате JSON"""
@@ -17,13 +30,4 @@ try:
     print(parsed_response_text)
 except JSONDecodeError:
     print("Response is not a JSON format")
-
-
-"""Работа к Cookies"""
-payload = {"login":"secret_login", "password":"secret_pass"}
-response = requests.post('https://playground.learnqa.ru/api/get_auth_cookie', params=payload)
-print(response.text)
-print(response.status_code)
-print(dict(response.cookies)) # получить cookies
-
 
