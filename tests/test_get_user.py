@@ -1,6 +1,6 @@
-from test_LearnQA.lib.base_class import BaseClass
-from test_LearnQA.lib.assertions import Assertions
-from test_LearnQA.lib.my_request import MyRequests
+from lib.base_class import BaseClass
+from lib.assertions import Assertions
+from lib.my_request import MyRequests
 
 
 class TestGetUser(BaseClass):
