@@ -1,4 +1,3 @@
 .idea
 .pytest_cache
-logs/*
 __init__.py
