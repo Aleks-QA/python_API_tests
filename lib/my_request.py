@@ -13,7 +13,7 @@ export ENV=prod      # linux или mac
 echo %ENV%
 
 # Запуск с отчетом Allure
-pytest --alluredir =test_results/
+python -s -m pytest --alluredir=test_results/   
 
 # Открыть отчеты Allure
 allure serve test_results/
