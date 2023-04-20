@@ -3,7 +3,6 @@ from lib.logger import Logger
 import allure
 from environment import ENV_OBJECT
 
-
 """ RUN TEST
 # Определить окружение для запуска(возможно нужно будет сменить терминал, или сначала ввести команду cmd)
 set ENV=prod         # win,
