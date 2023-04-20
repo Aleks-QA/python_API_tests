@@ -1,2 +1,2 @@
 # python_API_tests
-requests
+<h5>Running tests via docker: docker-compose up --build</h5>
