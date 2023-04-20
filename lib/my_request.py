@@ -1,9 +1,24 @@
 import requests
 from lib.logger import Logger
 import allure
+from environment import ENV_OBJECT
 
-# pytest --alluredir =test_results/
-# allure serve test_results/
+
+""" RUN TEST
+# Определить окружение для запуска(возможно нужно будет сменить терминал, или сначала ввести команду cmd)
+set ENV=prod         # win,
+export ENV=prod      # linux или mac
+
+# Проверить что переменная окружения корректна
+echo %ENV%
+
+# Запуск с отчетом Allure
+pytest --alluredir =test_results/
+
+# Открыть отчеты Allure
+allure serve test_results/
+"""
+
 
 class MyRequests:
     @staticmethod
@@ -28,14 +43,14 @@ class MyRequests:
 
     @staticmethod
     def _send(url: str, data: dict, headers: dict, cookies: dict, method: str):
-        send_url = f"https://playground.learnqa.ru/api{url}"
+        send_url = f"{ENV_OBJECT.get_base_url()}{url}"
 
         if headers is None:
             headers = {}
         if cookies is None:
             cookies = {}
 
-        Logger.add_requests(url, data=data, headers=headers, cookies=cookies, method=method)
+        Logger.add_requests(send_url, data=data, headers=headers, cookies=cookies, method=method)
 
         if method == "GET":
             response = requests.get(send_url, params=data, headers=headers, cookies=cookies)
