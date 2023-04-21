@@ -8,6 +8,6 @@ services:
     environment:
       - ENV=dev
     volumes:
-      - .:/tests_project/
+      - .:/test_project/
 
 # RUN   docker-compose up --build
