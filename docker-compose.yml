@@ -10,6 +10,8 @@ services:
     volumes:
       - .:/test_project/
 
+
+
 #artifacts: # Сущность, с помощью которой, мы сохраним результат тестирования.
 #  when: always # Сохранять всегда
 #  paths:
