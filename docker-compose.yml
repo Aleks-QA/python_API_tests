@@ -10,4 +10,10 @@ services:
     volumes:
       - .:/test_project/
 
+#artifacts: # Сущность, с помощью которой, мы сохраним результат тестирования.
+#  when: always # Сохранять всегда
+#  paths:
+#    - ./allure-results # Здесь будет сохранен отчет
+#  expire_in: 1 day # Да, он будет удален через день. Нет смысла хранить его в течение длительного срока.
+
 # RUN   docker-compose up --build
