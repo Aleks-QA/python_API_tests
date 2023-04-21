@@ -1,5 +1,5 @@
 import requests
-from other.get_weather.apikey import API_TOKEN
+from tests.templates.other import API_TOKEN
 
 """ Получить ответ от сайта(комплексный) """
 params = {1: 1}
