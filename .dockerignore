@@ -1,6 +1,6 @@
 .idea
 .pytest_cache
 __init__.py
-*.log
+logs
 test_results/
 venv/
