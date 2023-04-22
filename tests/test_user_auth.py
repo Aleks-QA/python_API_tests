@@ -17,7 +17,6 @@ class TestUserAuth(BaseClass):
             "email": 'vinkotov@example.com',
             "password": "1234"
         }
-
         response1 = MyRequests.post('/user/login', data=data)
 
         self.auth_sid = self.get_cookie(response1, "auth_sid")
@@ -30,7 +29,6 @@ class TestUserAuth(BaseClass):
                                    headers={"x-csrf-token": self.token},
                                    cookies={"auth_sid": self.auth_sid}
                                    )
-
         Assertions.assert_json_value_by_name(
             response2,
             "user_id",
@@ -47,7 +45,6 @@ class TestUserAuth(BaseClass):
         else:
             response2 = MyRequests.get("/user/auth",
                                        cookies={"auth_sid": self.auth_sid})
-
         Assertions.assert_json_value_by_name(
             response2,
             "user_id",
