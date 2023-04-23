@@ -2,8 +2,6 @@ import json.decoder
 from datetime import datetime
 import allure
 import random
-import string
-
 from faker import Faker
 from requests import Response
 
@@ -30,12 +28,11 @@ class BaseClass:
                 assert False, f'\nResponse is not in JSON format. Response text is "{response.text}"\n'
 
             assert name in response_as_dict, f"\nResponse JSON doesn't have key '{name}'\n"
-
             return response_as_dict[name]
 
     @staticmethod
-    def random_data(localization='En', email=None, firstname=None, username=None, lastname=None,
-                                  password=None, address=None, department=None):
+    def random_data(localization='En', email=None, firstname=None, username=None, lastname=None, address=None,
+                    password=None, job=None):
         """Prepare registration information"""
         with allure.step(f"Get registration data"):
             faker = Faker(localization)
@@ -48,7 +45,7 @@ class BaseClass:
             password: str = faker.password()
             address: str = faker.address()
             age = random.randint(10, 99)
-            department: str = faker.job()
+            job: str = faker.job()
 
             data = {
                 "email": email,
@@ -58,6 +55,6 @@ class BaseClass:
                 "user_name": user_name,
                 "address": address,
                 "age": age,
-                "department": department
+                "job": job
             }
             return data

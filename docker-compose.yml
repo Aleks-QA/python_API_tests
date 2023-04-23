@@ -6,7 +6,7 @@ services:
     image: pytest_runner
     container_name: pytest_runner_works
     environment:
-      - ENV=dev
+      - ENV=dev  #prod or dev
     volumes:
       - .:/test_project/
 
