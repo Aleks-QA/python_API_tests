@@ -1,5 +1,4 @@
 import allure
-
 from lib.base_class import BaseClass
 from lib.assertions import Assertions
 from lib.my_request import MyRequests
@@ -7,12 +6,22 @@ from lib.my_request import MyRequests
 
 @allure.epic("Edit user")
 class TestGetUser(BaseClass):
+    random_data = BaseClass.prepare_registration_data('ru')
+
+    data = {
+        "password": random_data["password"],
+        "username": random_data["user_name"],
+        "firstName": random_data["first_name"],
+        "lastName": random_data["last_name"],
+        "email": random_data["email"]
+    }
+
     @allure.description("Test edit user")
     def test_edit_just_created_user(self):
         with allure.step(f"REGISTER"):
             """REGISTER"""
-            register_data = self.prepare_registration_data()
-            response1 = MyRequests.post("/user/", data=register_data)
+            register_data = self.data
+            response1 = MyRequests.post("/user/", data=self.data)
 
             Assertions.assert_status_code(response1, 200)
             Assertions.assert_json_has_key(response1, "id")

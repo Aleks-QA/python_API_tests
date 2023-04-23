@@ -1,6 +1,10 @@
 import json.decoder
 from datetime import datetime
 import allure
+import random
+import string
+
+from faker import Faker
 from requests import Response
 
 
@@ -29,21 +33,31 @@ class BaseClass:
 
             return response_as_dict[name]
 
-    def prepare_registration_data(self, email=None):
+    @staticmethod
+    def prepare_registration_data(localization='En', email=None, firstname=None, username=None, lastname=None,
+                                  password=None, address=None, department=None):
         """Prepare registration information"""
         with allure.step(f"Get registration data"):
-            if email is None:
-                base_part = "Learnqa"
-                domain = "example.com"
-                random_part = datetime.now().strftime('%m%d%Y%H%M%S')
-                email = f"{base_part}{random_part}@{domain}"
-            return {
-                "password": "123",
-                "username": 'Alex',
-                "firstName": "Alex1",
-                "lastName": "Alex2",
-                "email": email
+            faker = Faker(localization)
+
+            random_part = datetime.now().strftime('%d%H%M%S')
+            email: str = faker.email()
+            first_name: str = faker.first_name()
+            user_name: str = faker.first_name() + random_part
+            last_name: str = faker.last_name()
+            password: str = faker.password()
+            address: str = faker.address()
+            age = random.randint(10, 99)
+            department: str = faker.job()
+
+            data = {
+                "email": email,
+                "password": password,
+                "first_name": first_name,
+                "last_name": last_name,
+                "user_name": user_name,
+                "address": address,
+                "age": age,
+                "department": department
             }
-
-
-
+            return data
