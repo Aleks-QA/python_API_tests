@@ -34,13 +34,13 @@ class BaseClass:
             return response_as_dict[name]
 
     @staticmethod
-    def prepare_registration_data(localization='En', email=None, firstname=None, username=None, lastname=None,
+    def random_data(localization='En', email=None, firstname=None, username=None, lastname=None,
                                   password=None, address=None, department=None):
         """Prepare registration information"""
         with allure.step(f"Get registration data"):
             faker = Faker(localization)
-
             random_part = datetime.now().strftime('%d%H%M%S')
+
             email: str = faker.email()
             first_name: str = faker.first_name()
             user_name: str = faker.first_name() + random_part

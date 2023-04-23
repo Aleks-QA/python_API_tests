@@ -6,7 +6,7 @@ from lib.my_request import MyRequests
 
 @allure.epic("Create user")
 class TestCreateUser(BaseClass):
-    random_data = BaseClass.prepare_registration_data('ru')
+    random_data = BaseClass.random_data('ru')
 
     data = {
         "password": random_data["password"],

@@ -13,9 +13,9 @@ class TestUserAuth(BaseClass):
     ]
 
     def setup_method(self):
-        register_data = self.prepare_registration_data()
-        email = register_data["email"]
-        password = register_data["password"]
+        # register_data = self.prepare_registration_data()
+        # email = register_data["email"]
+        # password = register_data["password"]
 
         data = {
             "email": 'vinkotov@example.com',
