@@ -44,7 +44,7 @@ class BaseClass:
             last_name: str = faker.last_name()
             password: str = faker.password()
             address: str = faker.address()
-            age = random.randint(10, 99)
+            age = random.randint(18, 100)
             job: str = faker.job()
 
             data = {

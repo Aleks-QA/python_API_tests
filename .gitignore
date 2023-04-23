@@ -3,3 +3,4 @@
 __init__.py
 *.log
 test_results/
+debag.py

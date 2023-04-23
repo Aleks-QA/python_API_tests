@@ -1,5 +1,4 @@
 import allure
-
 from lib.base_class import BaseClass
 from lib.assertions import Assertions
 from lib.my_request import MyRequests
