@@ -32,10 +32,7 @@ class TestGetUser(BaseClass):
 
         with allure.step(f"LOGIN"):
             """LOGIN"""
-            login_date = {
-                "email": email,
-                "password": password
-            }
+            login_date = {"email": email, "password": password}
             response2 = MyRequests.post("/user/login", data=login_date)
 
             auth_sid = self.get_cookie(response2, "auth_sid")
@@ -47,14 +44,12 @@ class TestGetUser(BaseClass):
             response3 = MyRequests.put(f"/user/{user_id}",
                                      headers={"x-csrf-token":token},
                                      cookies={"auth_sid":auth_sid},
-                                     data={"firstName":new_name}
-                                     )
+                                     data={"firstName":new_name})
             Assertions.assert_status_code(response3, 200)
 
         with allure.step(f"GET"):
             """GET"""
             response4 = MyRequests.get(f"/user/{user_id}",
                                      headers={"x-csrf-token":token},
-                                     cookies={"auth_sid":auth_sid},
-                                     )
+                                     cookies={"auth_sid":auth_sid},)
             Assertions.assert_json_value_by_name(response4, "firstName", new_name, "Wrong name of the user after edit")

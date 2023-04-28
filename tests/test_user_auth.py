@@ -7,21 +7,16 @@ import allure
 
 @allure.epic("Authorization cases")
 class TestUserAuth(BaseClass):
-    exclude_params = [
-        ("no_cookies"),
-        ("no_token")
-    ]
+    exclude_params = [("no_cookies"), ("no_token")]
 
     def setup_method(self):
         # register_data = self.prepare_registration_data()
         # email = register_data["email"]
         # password = register_data["password"]
-
         data = {
             "email": 'vinkotov@example.com',
             "password": "1234"
         }
-
         response1 = MyRequests.post('/user/login', data=data)
 
         self.auth_sid = self.get_cookie(response1, "auth_sid")
@@ -32,14 +27,13 @@ class TestUserAuth(BaseClass):
     def test_auth_user(self):
         response2 = MyRequests.get("/user/auth",
                                    headers={"x-csrf-token": self.token},
-                                   cookies={"auth_sid": self.auth_sid}
-                                   )
+                                   cookies={"auth_sid": self.auth_sid})
+
         Assertions.assert_json_value_by_name(
             response2,
             "user_id",
             self.user_id_from_auth_method,
-            "User id from method is not equal to user id from check method"
-        )
+            "User id from method is not equal to user id from check method")
 
     @allure.description("This test checks authorization status w/o sending auth cookies or token")
     @pytest.mark.parametrize("condition", exclude_params)
@@ -54,5 +48,4 @@ class TestUserAuth(BaseClass):
             response2,
             "user_id",
             0,
-            f"User is authorized with condition {condition}"
-        )
+            f"User is authorized with condition {condition}")
