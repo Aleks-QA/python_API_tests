@@ -8,13 +8,11 @@ from lib.my_request import MyRequests
 class TestCreateUser(BaseClass):
     random_data = BaseClass.random_data('ru')
 
-    data = {
-        "password": random_data["password"],
-        "username": random_data["user_name"],
-        "firstName": random_data["first_name"],
-        "lastName": random_data["last_name"],
-        "email": random_data["email"]
-    }
+    data = {"password": random_data["password"],
+            "username": random_data["user_name"],
+            "firstName": random_data["first_name"],
+            "lastName": random_data["last_name"],
+            "email": random_data["email"]}
 
     @allure.description("Test create user successfully")
     def test_create_user_successfully(self):
@@ -32,5 +30,5 @@ class TestCreateUser(BaseClass):
         response = MyRequests.post('/user/', data=data)
 
         Assertions.assert_status_code(response, 400)
-        assert response.content.decode('utf-8') == f"Users with email '{email}' already exists", f'unexpected response {response.content}'
-
+        assert response.content.decode(
+            'utf-8') == f"Users with email '{email}' already exists", f'unexpected response {response.content}'

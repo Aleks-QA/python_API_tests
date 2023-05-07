@@ -8,13 +8,11 @@ from lib.my_request import MyRequests
 class TestGetUser(BaseClass):
     random_data = BaseClass.random_data('ru')
 
-    data = {
-        "password": random_data["password"],
-        "username": random_data["user_name"],
-        "firstName": random_data["first_name"],
-        "lastName": random_data["last_name"],
-        "email": random_data["email"]
-    }
+    data = {"password": random_data["password"],
+            "username": random_data["user_name"],
+            "firstName": random_data["first_name"],
+            "lastName": random_data["last_name"],
+            "email": random_data["email"]}
 
     @allure.description("Test edit user")
     def test_edit_just_created_user(self):
@@ -42,14 +40,14 @@ class TestGetUser(BaseClass):
             """EDIT"""
             new_name = "changed name"
             response3 = MyRequests.put(f"/user/{user_id}",
-                                     headers={"x-csrf-token":token},
-                                     cookies={"auth_sid":auth_sid},
-                                     data={"firstName":new_name})
+                                       headers={"x-csrf-token": token},
+                                       cookies={"auth_sid": auth_sid},
+                                       data={"firstName": new_name})
             Assertions.assert_status_code(response3, 200)
 
         with allure.step(f"GET"):
             """GET"""
             response4 = MyRequests.get(f"/user/{user_id}",
-                                     headers={"x-csrf-token":token},
-                                     cookies={"auth_sid":auth_sid},)
+                                       headers={"x-csrf-token": token},
+                                       cookies={"auth_sid": auth_sid}, )
             Assertions.assert_json_value_by_name(response4, "firstName", new_name, "Wrong name of the user after edit")
