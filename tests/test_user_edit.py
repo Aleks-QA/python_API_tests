@@ -49,5 +49,20 @@ class TestGetUser(BaseClass):
             """GET"""
             response4 = MyRequests.get(f"/user/{user_id}",
                                        headers={"x-csrf-token": token},
-                                       cookies={"auth_sid": auth_sid}, )
+                                       cookies={"auth_sid": auth_sid})
+            Assertions.assert_status_code(response4, 200)
             Assertions.assert_json_value_by_name(response4, "firstName", new_name, "Wrong name of the user after edit")
+
+        with allure.step(f"DELETE"):
+            """DELETE"""
+            response5 = MyRequests.delete(f'/user/{user_id}',
+                                          headers={"x-csrf-token": token},
+                                          cookies={"auth_sid": auth_sid})
+            Assertions.assert_status_code(response5, 200)
+
+        with allure.step(f"CHECK DELETE"):
+            """CHECK DELETE"""
+            response6 = MyRequests.get(f"/user/{user_id}",
+                                       headers={"x-csrf-token": token},
+                                       cookies={"auth_sid": auth_sid})
+            Assertions.assert_status_code(response6, 404)
