@@ -39,6 +39,7 @@ class TestGetUser(BaseClass):
         with allure.step(f"EDIT"):
             """EDIT"""
             new_name = "changed name"
+
             response3 = MyRequests.put(f"/user/{user_id}",
                                        headers={"x-csrf-token": token},
                                        cookies={"auth_sid": auth_sid},
