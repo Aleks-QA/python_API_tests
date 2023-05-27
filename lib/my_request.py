@@ -41,7 +41,11 @@ class MyRequests:
 
     @staticmethod
     def _send(url: str, data: dict, headers: dict, cookies: dict, method: str):
-        send_url = f"{ENV_OBJECT.get_base_url()}{url}"
+        http = "http"
+        if http in url:
+            send_url = url
+        else:
+            send_url = f"{ENV_OBJECT.get_base_url()}{url}"
 
         if headers is None:
             headers = {}

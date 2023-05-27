@@ -15,7 +15,7 @@ class Logger:
     def add_requests(cls, url: str, data: dict, headers: dict, cookies: dict, method: str):
         test_name = os.environ.get('PYTEST_CURRENT_TEST')
 
-        data_to_add = f"\n-----\n"
+        data_to_add = f"\n-----------------------------------------------------------------------------------------\n"
         data_to_add += f"Test: {test_name}\n"
         data_to_add += f"Start time: {str(datetime.datetime.now())}\n"
         data_to_add += f"Requests method: {method}\n"
@@ -36,7 +36,7 @@ class Logger:
         data_to_add += f"Response text: {response.text}\n"
         data_to_add += f"Response headers: {headers_as_dict}\n"
         data_to_add += f"Response cookies: {cookies_as_dict}\n"
-        data_to_add += f"\n-----\n"
+        data_to_add += f"-----------------------------------------------------------------------------------------\n"
 
         cls.write_log_to_file(data_to_add)
 
