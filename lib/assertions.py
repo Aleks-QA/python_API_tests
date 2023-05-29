@@ -5,16 +5,17 @@ import json
 
 class Assertions:
     @staticmethod
-    def assert_json_value_by_name(response: Response, name_value, expected_value, error_massage): # Name - название значения которое ищем
+    def assert_json_value_by_name(response: Response, name_value, expected_value, error_massage): # Name - ключ по которому ищем
         """Comparison of the actual value with the expected value"""
-        with allure.step(f"Comparison of the actual value with the expected value: '{name_value}' == '{expected_value}'"):
+        with allure.step(f"Comparison of the actual value with the expected value: key value '{name_value}' == '{expected_value}'"):
             try:
                 response_as_dict = response.json()
             except json.JSONDecodeError:
                 assert False, f"\nResponse is not in JSON format. Response text is '{response.text}'\n"
 
             assert name_value in response_as_dict, f"\nResponse JSON doesn't have key '{name_value}'\n"
-            assert response_as_dict[name_value] == expected_value, error_massage
+            error_massage_return = str(error_massage) + ': ' + response_as_dict[name_value] + ' != ' + expected_value
+            assert response_as_dict[name_value] == expected_value, error_massage_return
 
     @staticmethod
     def assert_json_has_key(response: Response, name):
