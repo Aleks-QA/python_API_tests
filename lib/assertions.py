@@ -14,7 +14,7 @@ class Assertions:
                 assert False, f"\nResponse is not in JSON format. Response text is '{response.text}'\n"
 
             assert name_value in response_as_dict, f"\nResponse JSON doesn't have key '{name_value}'\n"
-            error_massage_return = str(error_massage) + ': ' + response_as_dict[name_value] + ' != ' + expected_value
+            error_massage_return = str(error_massage) + ': ' + str(response_as_dict[name_value]) + ' != ' + str(expected_value)
             assert response_as_dict[name_value] == expected_value, error_massage_return
 
     @staticmethod
