@@ -35,49 +35,31 @@ class TestCreateUser(BaseClass):
         assert response.content.decode(
             'utf-8') == f"Users with email '{email}' already exists", f'unexpected response {response.content}'
 
-    data_invalid_email = {"password": random_data["password"],
-            "username": random_data["user_name"],
-            "firstName": random_data["first_name"],
-            "lastName": random_data["last_name"],
-            "email": "alexgmail.com"}
-
-    data_empty_field = {"password": '',
-            "username": random_data["user_name"],
-            "firstName": random_data["first_name"],
-            "lastName": random_data["last_name"],
-            "email": random_data["email"]}
-
-    data_one_character_name = {"password": random_data["password"],
-            "username": random_data["user_name"],
-            "firstName": 'a',
-            "lastName": random_data["last_name"],
-            "email": random_data["email"]}
-
-    data_very_long_name = {"password": random_data["password"],
-            "username": random_data["user_name"],
-            "firstName": random_data["first_name"],
-            "lastName": random_data["last_name"],
-            "email": random_data["email"]}
+    @allure.step("Get random data")
+    def get_random_data(self):
+        random_data = BaseClass.random_data('ru')
+        data = {"password": random_data["password"],
+                "username": random_data["user_name"],
+                "firstName": random_data["first_name"],
+                "lastName": random_data["last_name"],
+                "email": random_data["email"]}
+        return data
 
 
-
-
-    data_test_create_user = [
-        ("invalid email", "alexgmail.com"),
-        ("Firefox", 'Mozilla/5.0 (X11; Linux i686; rv:110.0) Gecko/20100101 Firefox/110.0'),
-        ("No",
-         "Mozilla/5.0 (iPhone; CPU iPhone OS 15_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148")
-    ]
-
-    @pytest.mark.parametrize("user_agent_platform", data_test_create_user)
+    @pytest.mark.parametrize("field", ["password", "username", "firstName", "lastName", "email"])
+    @pytest.mark.parametrize("invalid_data", ['', 's', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaa'])
     @allure.description("Test                   ")
-    def test_check_user_agent_platform(self, user_agent_platform):
-        url = '/user/'
-        headers = {"User-Agent": user_agent_platform[1]}
+    def test_check_user_agent_platform(self, field, invalid_data):
+        test_data = self.get_random_data()
+        test_data[field] = invalid_data
+        print(test_data)
 
-        response = MyRequests.get(url=url, headers=headers)
+        response = MyRequests.post('/user/', data=test_data)
+        print(response.status_code)
         print(response.text)
 
         Assertions.assert_status_code(response, 200)
-        Assertions.assert_json_value_by_name(response, 'platform', user_agent_platform[0],
-                                             "the platform is not correctly defined")
