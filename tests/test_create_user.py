@@ -1,6 +1,5 @@
 import allure
 import pytest
-
 from lib.base_class import BaseClass
 from lib.assertions import Assertions
 from lib.my_request import MyRequests
@@ -45,21 +44,24 @@ class TestCreateUser(BaseClass):
                 "email": random_data["email"]}
         return data
 
-
     @pytest.mark.parametrize("field", ["password", "username", "firstName", "lastName", "email"])
-    @pytest.mark.parametrize("invalid_data", ['', 's', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                       'aaaaaaaaaaaaaaaaaaaaaaaaaaaa'])
-    @allure.description("Test                   ")
-    def test_check_user_agent_platform(self, field, invalid_data):
+    @pytest.mark.parametrize("invalid_data", ['', 's', 'not_available', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'])
+    @allure.description("Test registration of a new user with invalid data")
+    def test_create_user_with_invalid_data(self, field, invalid_data):
+        """test with an empty field, test with a field of 1 character,
+         test with more than 250 characters, test registration with no required field"""
         test_data = self.get_random_data()
-        test_data[field] = invalid_data
-        print(test_data)
+
+        if invalid_data == 'not_available':
+            test_data.pop(field)
+        else:
+            test_data[field] = invalid_data
 
         response = MyRequests.post('/user/', data=test_data)
-        print(response.status_code)
-        print(response.text)
 
-        Assertions.assert_status_code(response, 200)
+        Assertions.assert_status_code(response, 400)
