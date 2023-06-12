@@ -1,5 +1,20 @@
 import os
 
+""" ЗАПУСК ТЕСТОВ НА РАЗНЫХ ОКРУЖЕНИЯХ
+# Определить окружение для запуска(прописать переменную "ENV" в систему, возможно нужно будет сменить терминал,
+                                                                            или сначала ввести команду cmd(win))
+set ENV=prod         # win,
+export ENV=prod      # linux или mac
+
+# Проверить что переменная окружения корректна
+echo %ENV%
+
+# Запуск с отчетом Allure
+python -s -m pytest --alluredir=test_results/   
+
+# Открыть отчеты Allure
+allure serve test_results/
+"""
 
 class Environment:
     DEV = "dev"

@@ -3,20 +3,6 @@ from lib.logger import Logger
 import allure
 from environment import ENV_OBJECT
 
-""" RUN TEST
-# Определить окружение для запуска(возможно нужно будет сменить терминал, или сначала ввести команду cmd(win))
-set ENV=prod         # win,
-export ENV=prod      # linux или mac
-
-# Проверить что переменная окружения корректна
-echo %ENV%
-
-# Запуск с отчетом Allure
-python -s -m pytest --alluredir=test_results/   
-
-# Открыть отчеты Allure
-allure serve test_results/
-"""
 
 class MyRequests:
     @staticmethod
