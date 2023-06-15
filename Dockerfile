@@ -18,6 +18,8 @@ CMD python -s -m pytest --alluredir=test_results/ /test_project/tests/
 
 
 
-#   docker build -t pytest_runner .       # создать образ
-#   docker run --rm --mount type=bind,src=C:\Test\python_API_tests,target=/tests_project/ pytest_runner     #запуск
 
+
+
+#   docker-compose up --build           # запуск
+#   allure serve test_results/          # отчет
