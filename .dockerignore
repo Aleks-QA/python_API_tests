@@ -1,7 +1,7 @@
 .idea
 .pytest_cache
-__init__.py
 logs
 test_results/
 venv/
 debag.py
+tests/templates
