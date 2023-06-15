@@ -10,9 +10,6 @@ class TestUserAuth(BaseClass):
     exclude_params = [("no_cookies"), ("no_token")]
 
     def setup_method(self):
-        # register_data = self.prepare_registration_data()
-        # email = register_data["email"]
-        # password = register_data["password"]
         data = {"email": 'vinkotov@example.com',
                 "password": "1234"}
         response1 = MyRequests.post('/user/login', data=data)
@@ -34,11 +31,9 @@ class TestUserAuth(BaseClass):
     @pytest.mark.parametrize("condition", exclude_params)
     def test_negative_auth_check(self, condition):
         if condition == 'no_cookies':
-            response2 = MyRequests.get("/user/auth",
-                                       headers={"x-csrf-token": self.token})
+            response2 = MyRequests.get("/user/auth", headers={"x-csrf-token": self.token})
         else:
-            response2 = MyRequests.get("/user/auth",
-                                       cookies={"auth_sid": self.auth_sid})
+            response2 = MyRequests.get("/user/auth", cookies={"auth_sid": self.auth_sid})
         Assertions.assert_json_value_by_name(
             response2,
             "user_id",
