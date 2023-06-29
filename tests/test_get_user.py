@@ -8,6 +8,11 @@ from lib.my_request import MyRequests
 class TestGetUser(BaseClass):
     @allure.description("Test get user details not auth")
     def test_get_user_details_not_auth(self):
+        """
+        1 - Получить информацию о пользователе по id, без авторизации
+        2 - Убедиться что в ответе есть поле "username"
+        3 - Убедиться что в ответе отсутствуют недоступные для неавторизованного пользователя данные
+        """
         response = MyRequests.get("/user/2")
 
         Assertions.assert_json_has_key(response, "username")
