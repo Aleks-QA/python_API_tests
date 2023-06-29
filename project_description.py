@@ -40,7 +40,7 @@ class BaseClassExample:
 
 # -------------------------------------------   tests/test_example.py    ---------------------------------------------
 
-class TestGetUser(BaseClassExample):
+class TestGetUser(BaseClassExample):  # 708 vs 1013
     """
     tests/ - СОДЕРЖИТ ТЕСТЫ, ОПИСАННЫЕ БИЗНЕС-ЛОГИКОЙ ТЕСТ-КЕЙСОВ
     ШАГИ:
@@ -50,6 +50,12 @@ class TestGetUser(BaseClassExample):
     4 - Убедиться что в ответе отсутствуют недоступные для неавторизованного пользователя данные
     5 - Убедиться что заголовок ответа "Content-Type" имеет значение "application/json"
     """
+
+    """
+    СРАВНЕНИЕ ОБЪЕМА КОДА БЕЗ УЧЕТА ПОДКЛЮЧЕНИЯ ОТЧЕТОВ И КОММЕНТАРИЕВ 
+    708 символов при использовании данного фреймворка vs 1013 символов без него
+    """
+
     def test_get_user_details_not_auth(self):
         """Построение тестов на основе данного фреймворка"""
         headers = {"Content-Type": 'application/json'}
@@ -72,7 +78,6 @@ class TestGetUser(BaseClassExample):
         actual_header = BaseClassExample.get_header(self, response, 'Content-Type')
         assert actual_header == 'application/json', 'invalid header'
 
-
     def test_get_user_details_not_auth_old(self):
         """Построение тестов БЕЗ использования данного фреймворка"""
         url = "https://playground.learnqa.ru/api/user/1"
@@ -91,9 +96,9 @@ class TestGetUser(BaseClassExample):
         assert "Lana" == response_as_dict[name_header], "invalid value"
 
         # Убедиться что в ответе отсутствуют недоступные для неавторизованного пользователя данные
-        assert "email" not in response_as_dict, f"\nResponse JSON doesn't have key '{name_header}'\n"
-        assert "firstname" not in response_as_dict, f"\nResponse JSON doesn't have key '{name_header}'\n"
-        assert "lastname" not in response_as_dict, f"\nResponse JSON doesn't have key '{name_header}'\n"
+        assert "email" not in response_as_dict, f"\nJSON response must not contain a key '{name_header}'\n"
+        assert "firstname" not in response_as_dict, f"\nJSON response must not contain a key '{name_header}'\n"
+        assert "lastname" not in response_as_dict, f"\nJSON response must not contain a key '{name_header}'\n"
 
         # Убедиться что заголовок ответа "Content-Type" имеет значение "application/json
         actual_header = response.headers["Content-Type"]
@@ -167,39 +172,3 @@ class AssertionsExample:
         """Comparison of the actual code status with the expected value"""
         assert response.status_code == expected_status_code, \
             f"\nUnexpected status code! Expected: {expected_status_code}, Actual {response.status_code}\n"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
