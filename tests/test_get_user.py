@@ -22,6 +22,10 @@ class TestGetUser(BaseClass):
 
     @allure.description("Test get user details auth as same user")
     def test_get_user_details_auth_as_same_user(self):
+        """
+        1 - Авторизация, получение токена и куки
+        2 - Проверка, что пользователь авторизовался успешно
+        """
         data = {"email": "vinkotov@example.com",
                 "password": "1234"}
         response1 = MyRequests.post("/user/login", data=data)
