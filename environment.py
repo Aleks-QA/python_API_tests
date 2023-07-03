@@ -16,7 +16,12 @@ python -s -m pytest --alluredir=test_results/
 allure serve test_results/
 """
 
+
 class Environment:
+    """
+    Вспомогательный скрипт который возвращает домен в зависимости от того,
+    на каком окружении мы хотим запускать тесты.
+    """
     DEV = "dev"
     PROD = "prod"
 

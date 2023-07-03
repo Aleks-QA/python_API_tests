@@ -4,6 +4,11 @@ import json
 
 
 class Assertions:
+    """
+    Содержит вспомогательные функции сравнения,
+    На вход получают ответ от сервера, ожидаемое значение и т.п.
+    Парсят из ответа фактические значения и сравнивают их.
+    """
     @staticmethod
     def assert_json_value_by_name(response: Response, name_value, expected_value, error_massage): # Name - ключ по которому ищем
         """Comparison of the actual value with the expected value"""

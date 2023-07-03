@@ -7,6 +7,7 @@ from requests import Response
 
 
 class BaseClass:
+    """Содержит ключевые методы которые вынесены в родительский класс для пере-использования в тестах"""
     def get_cookie(self, response: Response, cookie_name):
         """Find the cookie and get the value"""
         with allure.step(f"Find the cookie '{cookie_name}'"):
@@ -34,6 +35,11 @@ class BaseClass:
     def random_data(localization='En', email=None, firstname=None, username=None, lastname=None, address=None,
                     password=None, job=None):
         """Prepare registration information"""
+        # EXAMPLE OF USE IN TESTS
+        # random_data = BaseClass.random_data('ru')
+        # data = {"username": random_data["user_name"],
+        #         "email": random_data["email"]}
+
         with allure.step(f"Get registration data"):
             faker = Faker(localization)
             random_part = datetime.now().strftime('%d%H%M%S')
@@ -44,7 +50,7 @@ class BaseClass:
             last_name: str = faker.last_name()
             password: str = faker.password()
             address: str = faker.address()
-            age = random.randint(18, 100)
+            age = random.randint(18, 99)
             job: str = faker.job()
 
             data = {

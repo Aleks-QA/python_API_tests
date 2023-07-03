@@ -5,6 +5,11 @@ from environment import ENV_OBJECT
 
 
 class MyRequests:
+    """
+    Это вспомогательный класс обертка, внутри этого класса происходят сами запросы,
+    Необходим для того, чтобы в тестах напрямую не использовать requests,
+    Благодаря этому происходит надежное построение отчетов.
+    """
     @staticmethod
     def post(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
         with allure.step(f"POST request to URL '{url}'"):
