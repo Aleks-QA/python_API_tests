@@ -34,6 +34,7 @@ class TestUserAuth(BaseClass):
             response2 = MyRequests.get("/user/auth", headers={"x-csrf-token": self.token})
         else:
             response2 = MyRequests.get("/user/auth", cookies={"auth_sid": self.auth_sid})
+        Assertions.assert_status_code(response2, 200)
         Assertions.assert_json_value_by_name(
             response2,
             "user_id",

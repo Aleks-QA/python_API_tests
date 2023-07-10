@@ -36,6 +36,7 @@ class TestCreateUser(BaseClass):
 
     @allure.step("Get random data")
     def get_random_data(self):
+        """Получение данных для регистрации вынесено отдельно для генерации новых данных в каждом тесте"""
         random_data = BaseClass.random_data('ru')
         data = {"password": random_data["password"],
                 "username": random_data["user_name"],
