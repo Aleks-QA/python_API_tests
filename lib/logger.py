@@ -28,7 +28,7 @@ class Logger:
         cls.write_log_to_file(data_to_add)
 
     @classmethod
-    def add_response(cls, response: Response):
+    def add_response(cls, response):
         cookies_as_dict = dict(response.cookies)
         headers_as_dict = dict(response.headers)
 
