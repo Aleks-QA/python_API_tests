@@ -3,24 +3,23 @@ from datetime import datetime
 import allure
 import random
 from faker import Faker
-from requests import Response
 
 
 class BaseClass:
     """Содержит ключевые методы которые вынесены в родительский класс для пере-использования в тестах"""
-    def get_cookie(self, response: Response, cookie_name):
+    def get_cookie(self, response, cookie_name):
         """Find the cookie and get the value"""
         with allure.step(f"Find the cookie '{cookie_name}'"):
             assert cookie_name in response.cookies, f'\nCannot find cookie with name {cookie_name} in the last response\n'
             return response.cookies[cookie_name]
 
-    def get_header(self, response: Response, headers_name):
+    def get_header(self, response, headers_name):
         """Find the header and get the value"""
         with allure.step(f"Find the header '{headers_name}'"):
             assert headers_name in response.headers, f'\nCannot find header with name {headers_name} in the last response\n'
             return response.headers[headers_name]
 
-    def get_json_value(self, response: Response, name):
+    def get_json_value(self, response, name):
         """Check the format of the response, and the presence of the key"""
         with allure.step(f"Check the format of the response, and the presence of the key '{name}'"):
             try:
