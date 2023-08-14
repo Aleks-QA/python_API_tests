@@ -9,7 +9,7 @@ from lib.my_request import MyRequests
 class TestUserAgent(BaseClass):
     """
     Проверка определения параметров клиента по строке заголовка User Agent,
-    на вход подаем по паре параметров(ожидаемое значение параметра и входное значение)
+    на вход подаем по паре параметров(ожидаемое значение параметра и фактическое значение проверяемого параметра)
     """
     user_agent_device = [
         ("iOS", 'Mozilla/5.0 (iPad; CPU OS 13_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko)'
@@ -22,6 +22,7 @@ class TestUserAgent(BaseClass):
     @pytest.mark.parametrize("user_agent_device", user_agent_device)
     @allure.description("Test check user agent - device")
     def test_check_user_agent_device(self, user_agent_device):
+        """Тестовая проверка user агента - определение устройства"""
         url = 'https://playground.learnqa.ru/ajax/api/user_agent_check'
         headers = {"User-Agent": user_agent_device[1]}
 
@@ -42,6 +43,7 @@ class TestUserAgent(BaseClass):
     @pytest.mark.parametrize("user_agent_platform", user_agent_platform)
     @allure.description("Test check user agent - platform")
     def test_check_user_agent_platform(self, user_agent_platform):
+        """Тестовая проверка user агента - определение платформы"""
         url = 'https://playground.learnqa.ru/ajax/api/user_agent_check'
         headers = {"User-Agent": user_agent_platform[1]}
 
@@ -62,8 +64,9 @@ class TestUserAgent(BaseClass):
     ]
 
     @pytest.mark.parametrize("user_agent_browser", user_agent_browser)
-    @allure.description("Test check user agent - device")
+    @allure.description("Test check user agent - browser")
     def test_check_user_agent_browser(self, user_agent_browser):
+        """Тестовая проверка user агента - определение браузера"""
         url = 'https://playground.learnqa.ru/ajax/api/user_agent_check'
         headers = {"User-Agent": user_agent_browser[1]}
 

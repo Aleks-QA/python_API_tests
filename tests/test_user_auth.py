@@ -7,9 +7,8 @@ import allure
 
 @allure.epic("Authorization cases")
 class TestUserAuth(BaseClass):
-    exclude_params = [("no_cookies"), ("no_token")]
-
     def setup_method(self):
+        """Авторизация и сохранение токена, куки и ID пользователя для следующих тестов"""
         data = {"email": 'vinkotov@example.com',
                 "password": "1234"}
         response1 = MyRequests.post('/user/login', data=data)
@@ -18,8 +17,9 @@ class TestUserAuth(BaseClass):
         self.token = self.get_header(response1, "x-csrf-token")
         self.user_id_from_auth_method = self.get_json_value(response1, "user_id")
 
-    @allure.description("This test successfully authorize user by email and password")
+    @allure.description("This test successfully authorizes the user by token and cookie")
     def test_auth_user(self):
+        """Данный тест успешно авторизует пользователя по токену и cookie"""
         response2 = MyRequests.get("/user/auth", headers={"x-csrf-token": self.token}, cookies={"auth_sid": self.auth_sid})
         Assertions.assert_json_value_by_name(
             response2,
@@ -27,9 +27,12 @@ class TestUserAuth(BaseClass):
             self.user_id_from_auth_method,
             "User id from method is not equal to user id from check method")
 
+    exclude_params = [("no_cookies"), ("no_token")]
+
     @allure.description("This test checks authorization status w/o sending auth cookies or token")
     @pytest.mark.parametrize("condition", exclude_params)
     def test_negative_auth_check(self, condition):
+        """Этот тест проверяет статус авторизации без отправки cookies или токена auth"""
         if condition == 'no_cookies':
             response2 = MyRequests.get("/user/auth", headers={"x-csrf-token": self.token})
         else:

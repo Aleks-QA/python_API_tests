@@ -16,6 +16,7 @@ class TestGetUser(BaseClass):
 
     @allure.description("Test edit user")
     def test_edit_just_created_user(self):
+        """Создание нового пользователя, авторизация, редактирование и удаление"""
         with allure.step(f"REGISTER"):
             """REGISTER"""
             register_data = self.data
