@@ -45,26 +45,14 @@ class MyRequests:
 
         Logger.add_requests(send_url, data=data, headers=headers, cookies=cookies, method=method)
 
-        # if method == "GET":
-        #     response = requests.get(send_url, params=data, headers=headers, cookies=cookies)
-        # elif method == "POST":
-        #     response = requests.post(send_url, data=data, headers=headers, cookies=cookies)
-        # elif method == "PUT":
-        #     response = requests.put(send_url, data=data, headers=headers, cookies=cookies)
-        # elif method == "DELETE":
-        #     response = requests.delete(send_url, data=data, headers=headers, cookies=cookies)
-        # else:
-        #     raise Exception(f"Bad HTTP method '{method}' was received")
-
-        """temporary workaround SSLError"""
         if method == "GET":
-            response = requests.get(send_url, params=data, headers=headers, cookies=cookies, verify=False)
+            response = requests.get(send_url, params=data, headers=headers, cookies=cookies)
         elif method == "POST":
-            response = requests.post(send_url, data=data, headers=headers, cookies=cookies, verify=False)
+            response = requests.post(send_url, data=data, headers=headers, cookies=cookies)
         elif method == "PUT":
-            response = requests.put(send_url, data=data, headers=headers, cookies=cookies, verify=False)
+            response = requests.put(send_url, data=data, headers=headers, cookies=cookies)
         elif method == "DELETE":
-            response = requests.delete(send_url, data=data, headers=headers, cookies=cookies, verify=False)
+            response = requests.delete(send_url, data=data, headers=headers, cookies=cookies)
         else:
             raise Exception(f"Bad HTTP method '{method}' was received")
 
