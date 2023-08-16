@@ -2,8 +2,6 @@ import allure
 import requests
 from requests import Response
 from lib.logger import Logger
-from lib.my_request import MyRequests
-
 
 """
 ОПИСАНИЕ И ПРИМЕР РАБОТЫ ДАННОГО ПРОЕКТА
@@ -56,8 +54,7 @@ class TestGetUser(BaseClassExample):  # 708 vs 1013
         """Построение тестов на основе данного фреймворка"""
         headers = {"Content-Type": 'application/json'}
         # Получить информацию о пользователе по id, без авторизации
-        response = MyRequests.get("/user/1", headers=headers)  # temporary workaround SSLError
-        # response = MyRequestsExample.get("/user/1", headers=headers)
+        response = MyRequestsExample.get("/user/1", headers=headers)
 
         # Убедиться что статус код - 200
         AssertionsExample.assert_status_code(response, 200)
@@ -80,8 +77,7 @@ class TestGetUser(BaseClassExample):  # 708 vs 1013
         url = "https://playground.learnqa.ru/api/user/1"
         headers = {"Content-Type": 'application/json'}
         # Получить информацию о пользователе по id, без авторизации
-        response = requests.get(url, headers=headers, verify=False)  # temporary workaround SSLError
-        # response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers)
 
         # Убедиться что статус код - 200
         status_code = response.status_code
