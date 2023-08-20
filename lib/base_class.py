@@ -35,7 +35,9 @@ class BaseClass:
                     password=None, job=None):
         """Prepare registration information"""
         # EXAMPLE OF USE IN TESTS
+        # from lib.base_class import BaseClass
         # random_data = BaseClass.random_data('ru')
+        #
         # data = {"username": random_data["user_name"],
         #         "email": random_data["email"]}
 
@@ -43,23 +45,14 @@ class BaseClass:
             faker = Faker(localization)
             random_part = datetime.now().strftime('%d%H%M%S')
 
-            email: str = faker.email()
-            first_name: str = faker.first_name()
-            user_name: str = faker.first_name() + random_part
-            last_name: str = faker.last_name()
-            password: str = faker.password()
-            address: str = faker.address()
-            age = random.randint(18, 99)
-            job: str = faker.job()
-
             data = {
-                "email": email,
-                "password": password,
-                "first_name": first_name,
-                "last_name": last_name,
-                "user_name": user_name,
-                "address": address,
-                "age": age,
-                "job": job
+                "email": faker.email(),
+                "password": faker.password(),
+                "first_name": faker.first_name(),
+                "last_name": faker.last_name(),
+                "user_name": faker.first_name() + random_part,
+                "address": faker.address(),
+                "age": random.randint(18, 99),
+                "job": faker.job()
             }
             return data
