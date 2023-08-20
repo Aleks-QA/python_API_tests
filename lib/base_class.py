@@ -36,8 +36,8 @@ class BaseClass:
         """Prepare registration information"""
         # EXAMPLE OF USE IN TESTS
         # from lib.base_class import BaseClass
-        # random_data = BaseClass.random_data('ru')
         #
+        # random_data = BaseClass.random_data('ru')
         # data = {"username": random_data["user_name"],
         #         "email": random_data["email"]}
 

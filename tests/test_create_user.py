@@ -42,12 +42,12 @@ class TestCreateUser(BaseClass):
             'utf-8') == f"Users with email '{email}' already exists", f'unexpected response {response.content}'
 
     @pytest.mark.parametrize("field", ["password", "username", "firstName", "lastName", "email"])
-    @pytest.mark.parametrize("invalid_data", ['', 's', 'absent', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                                 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                                 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                                 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                                 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                                                                 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'])
+    @pytest.mark.parametrize("invalid_data", ['s', 'no_field', '', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                   'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                   'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                   'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                   'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                                                   'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'])
     @allure.description("Test registration of a new user with invalid data")
     def test_create_user_with_invalid_data(self, field, invalid_data):
         """
@@ -61,11 +61,12 @@ class TestCreateUser(BaseClass):
         """
         test_data = self.get_random_data()
 
-        if invalid_data == 'absent':
+        if invalid_data == 'no_field':
             test_data.pop(field)  # удаляем необходимое поле из данных для регистрации
         else:
             test_data[field] = invalid_data  # редактируем необходимое поле из данных для регистрации
 
+        print(test_data)
         response = MyRequests.post('/user/', data=test_data)
 
         Assertions.assert_status_code(response, 400)  # ожидаем ошибку
