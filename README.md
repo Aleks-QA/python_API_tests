@@ -9,10 +9,10 @@
 </ul>
 <hr>
 <h4 dir="auto"><em>Для запуска тестов необходимо:</em></h4>
-<ol>
+<ul>
      <li>Скачать проект с удаленного репозитория на свой локальный, с помощью команды:<br>     <code>git clone https://github.com/Aleks-QA/python_API_tests.git</code></li>
      <li>Открыть проект на установленной заранее IDE</li>
-</ol>  
+</ul>  
 
 <h5><em>Запуск тестов:</em></h5>
 <ol>
