@@ -25,7 +25,7 @@
 
 <h5><em>Запуск тестов в Docker:</em></h5>
 <ol>
-    <li>Развернуть контейнеры с помощью команды:<br><code>docker-compose up --build</code></li>
+    <li>Развернуть контейнер с помощью команды:<br><code>docker-compose up --build</code></li>
     <li>Открыть отчет о прохождении тестов командой:<br>          <code>allure serve test_results/ </code></li>
 </ol>
 <hr>          
