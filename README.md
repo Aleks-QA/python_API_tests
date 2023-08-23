@@ -14,7 +14,7 @@
      <li>Открыть проект на установленной заранее IDE</li>
 </ol>  
 
-<h4>Запуск тестов:</h4>
+<h5><em>Запуск тестов:</em></h5>
 <ol>
      <li>Создать и активировать виртуальное окружение:<br><code>python -m venv venv</code><br>
      <code>venv\Scripts\activate</code></li>
@@ -22,7 +22,7 @@
      <li>Запустить тесты командой:<br><code>python -s -m pytest --alluredir=test_results</code> </li>
      <li>Открыть отчет о прохождении тестов командой:<br>          <code>allure serve test_results/ </code></li>
 </ol>
-<h4>Запуск тестов в Docker:</h4>
+<h5><em>Запуск тестов в Docker:</em></h5>
 <ol><code>docker-compose up --build</code></ol>    
 
 
