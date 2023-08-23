@@ -22,9 +22,11 @@
      <li>Запустить тесты командой:<br><code>python -s -m pytest --alluredir=test_results</code> </li>
      <li>Открыть отчет о прохождении тестов командой:<br>          <code>allure serve test_results/ </code></li>
 </ol>
+
 <h5><em>Запуск тестов в Docker:</em></h5>
-<ol><code>docker-compose up --build</code></ol>    
-
-
+<ol>
+    <li>Развернуть контейнеры с помощью команды:<br><code>docker-compose up --build</code></li>
+    <li>Открыть отчет о прохождении тестов командой:<br>          <code>allure serve test_results/ </code></li>
+</ol>
 <hr>          
 <h5>Добавлено краткое описание работы проекта в <a href="https://github.com/Aleks-QA/python_API_tests/blob/main/project_description.py" target="_blank">project_description.py</a></h5>
